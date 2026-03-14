@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum Priority {
+  UREGENTE
+  IMEDIATO
+  SEM_URGENCIA
+}
+
+model Equipment {
+  id           Int     @id @default(autoincrement())
+  code         String  @unique
+  name         String
+  manufacturer String?
+  model        String?
+  orders       Order[]
+}
+
+model Order {
+  id              Int       @id @default(autoincrement())
+  equipmentId     Int
+  equipment       Equipment @relation(fields: [equipmentId], references: [id])
+  requesterName   String
+  requestDate     DateTime  @default(now())
+  failureDesc     String
+  priority        Priority
+  maintenanceDate DateTime?
+  responsible     String?
+  startTime       String? // ou DateTime
+  endTime         String?
+  cause           String?
+  serviceDesc     String?
+  materials       String? // campo JSON ou texto estruturado
+  totalCost       Float?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
