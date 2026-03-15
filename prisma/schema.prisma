@@ -11,7 +11,7 @@ datasource db {
 }
 
 enum Priority {
-  UREGENTE
+  URGENTE
   IMEDIATO
   SEM_URGENCIA
 }

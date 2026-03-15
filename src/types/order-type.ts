@@ -7,23 +7,31 @@ export interface Equipment {
   model?: string | null;
 }
 
-export interface Order {
+export type Priority = 'URGENTE' | 'IMEDIATO' | 'SEM_URGENCIA';
+
+export type OS = {
+  equipment: {
+    name: string;
+    id: number;
+    code: string;
+    manufacturer: string | null;
+    model: string | null;
+  };
+} & {
   id: number;
   equipmentId: number;
-  equipment?: Equipment;
   requesterName: string;
-  requesterSignature?: string | null;
   requestDate: Date;
   failureDesc: string;
-  priority: string;
-  maintenanceDate?: Date | null;
-  responsible?: string | null;
-  startTime?: string | null;
-  endTime?: string | null;
-  cause?: string | null;
-  serviceDesc?: string | null;
-  materials?: string | null;
-  totalCost?: number | null;
+  priority: Priority;
+  maintenanceDate: Date | null;
+  responsible: string | null;
+  startTime: string | null;
+  endTime: string | null;
+  cause: string | null;
+  serviceDesc: string | null;
+  materials: string | null;
+  totalCost: number | null;
   createdAt: Date;
   updatedAt: Date;
-}
+};
