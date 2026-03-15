@@ -42,16 +42,18 @@ export function UpdateOMDialog({
     reset,
   } = useForm<OMFormData>({
     resolver: zodResolver(omSchema),
-    defaultValues: initialData || {
-      maintenanceDate: new Date().toISOString().slice(0, 16),
-      startTime: '',
-      endTime: '',
-      responsible: '',
-      cause: '',
-      serviceDesc: '',
-      materials: '',
-      totalCost: undefined,
-    },
+    defaultValues: !!initialData
+      ? {
+          maintenanceDate: new Date().toISOString().slice(0, 16),
+          startTime: '',
+          endTime: '',
+          responsible: '',
+          cause: '',
+          serviceDesc: '',
+          materials: '',
+          totalCost: undefined,
+        }
+      : initialData,
   });
 
   const onSubmit = async (data: OMFormData) => {

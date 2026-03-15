@@ -36,7 +36,9 @@ export const omSchema = z
       .string()
       .min(10, 'Descrição do serviço deve ter pelo menos 10 caracteres'),
     materials: z.string().optional(),
-    totalCost: z.number().min(0, 'Custo total deve ser um valor positivo'),
+    totalCost: z
+      .number('Digite um valor')
+      .min(0, 'Custo total deve ser um valor positivo'),
   })
   .partial();
 
