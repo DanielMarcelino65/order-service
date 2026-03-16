@@ -78,7 +78,7 @@ export async function updateOM(orderId: number, omData: OMFormData) {
         totalCost: omData.totalCost,
       },
     });
-
+    revalidatePath('/');
     return { success: true, data: updatedOrder };
   } catch (error) {
     console.error('Erro ao atualizar OM:', error);
