@@ -34,7 +34,6 @@ export function UpdateOMDialog({
   children,
 }: UpdateOMDialogProps) {
   const [open, setOpen] = useState(false);
-  console.log(initialData);
 
   const {
     register,
