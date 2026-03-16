@@ -34,6 +34,7 @@ export function UpdateOMDialog({
   children,
 }: UpdateOMDialogProps) {
   const [open, setOpen] = useState(false);
+  console.log(initialData);
 
   const {
     register,
@@ -42,18 +43,21 @@ export function UpdateOMDialog({
     reset,
   } = useForm<OMFormData>({
     resolver: zodResolver(omSchema),
-    defaultValues: !!initialData
-      ? {
-          maintenanceDate: new Date().toISOString().slice(0, 16),
-          startTime: '',
-          endTime: '',
-          responsible: '',
-          cause: '',
-          serviceDesc: '',
-          materials: '',
-          totalCost: undefined,
-        }
-      : initialData,
+    defaultValues:
+      initialData?.responsible !== undefined &&
+      initialData?.responsible !== '' &&
+      initialData?.responsible !== null
+        ? initialData
+        : {
+            maintenanceDate: new Date().toISOString().slice(0, 16),
+            startTime: '',
+            endTime: '',
+            responsible: '',
+            cause: '',
+            serviceDesc: '',
+            materials: '',
+            totalCost: undefined,
+          },
   });
 
   const onSubmit = async (data: OMFormData) => {
